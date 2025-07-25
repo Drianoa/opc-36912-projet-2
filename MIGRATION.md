@@ -119,3 +119,48 @@ Migration completed (1 file modified).
 
 > Updates calls to afterRender with an explicit phase to the new API.
 Migration completed (No changes made).
+
+## Migration Angular 18.2.13 -> 19.2.14
+
+### ** Executing migrations of package '@angular/cli' **
+
+> Update '@angular/ssr' import paths to use the new '/node' entry point when 'CommonEngine' is detected.
+Migration completed (No changes made).
+
+> Update the workspace configuration by replacing deprecated options in 'angular.json' for compatibility with the latest Angular CLI changes.
+Migration completed (No changes made).
+
+### ** Optional migrations of package '@angular/cli' **
+
+This package has 1 optional migration that can be executed.
+Optional migrations may be skipped and executed after the update process, if preferred.
+
+Select the migrations that you'd like to run [use-application-builder] Migrate application projects to the new build system. (https://angular.dev/tools/cli/build-system-migration)
+
+> Migrate application projects to the new build system.
+Application projects that are using the '@angular-devkit/build-angular' package's 'browser' and/or 'browser-esbuild' builders will be migrated to use the new 'application' builder.
+You can read more about this, including known issues and limitations, here: https://angular.dev/tools/cli/build-system-migration
+UPDATE tsconfig.json (931 bytes)
+Migration completed (1 file modified).
+
+### ** Executing migrations of package '@angular/core' **
+
+> Updates non-standalone Directives, Component and Pipes to 'standalone:false' and removes 'standalone:true' from those who are standalone.
+UPDATE src/app/pages/home/home.component.ts (562 bytes)
+UPDATE src/app/pages/not-found/not-found.component.ts (327 bytes)
+UPDATE src/app/app.component.ts (505 bytes)
+Migration completed (3 files modified).
+
+> Updates ExperimentalPendingTasks to PendingTasks.
+Migration completed (No changes made).
+
+### ** Optional migrations of package '@angular/core' **
+
+This package has 1 optional migration that can be executed.
+Optional migrations may be skipped and executed after the update process, if preferred.
+
+Select the migrations that you'd like to run [provide-initializer] Replaces `APP_INITIALIZER`, `ENVIRONMENT_INITIALIZER` & `PLATFORM_INITIALIZER` respectively with `provideAppInitializer`,    
+`provideEnvironmentInitializer` & `providePlatformInitializer`.
+
+> Replaces `APP_INITIALIZER`, `ENVIRONMENT_INITIALIZER` & `PLATFORM_INITIALIZER` respectively with `provideAppInitializer`, `provideEnvironmentInitializer` & `providePlatformInitializer`.      
+Migration completed (No changes made).
