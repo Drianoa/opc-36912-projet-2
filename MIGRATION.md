@@ -89,3 +89,33 @@ Migration completed (No changes made).
 
 > Updates two-way bindings that have an invalid expression to use the longform expression instead.
 Migration completed (No changes made).
+
+
+## Migration Angular 17.3.12 -> 18.2.13
+
+### ** Optional migrations of package '@angular/cli' **
+
+This package has 1 optional migration that can be executed.
+Optional migrations may be skipped and executed after the update process, if preferred.
+
+Select the migrations that you'd like to run [use-application-builder] Migrate application projects to the new build system. (https://angular.dev/tools/cli/build-system-migration)
+
+> Migrate application projects to the new build system.
+Application projects that are using the '@angular-devkit/build-angular' package's 'browser' and/or 'browser-esbuild' builders will be migrated to use the new 'application' builder.
+You can read more about this, including known issues and limitations, here: https://angular.dev/tools/cli/build-system-migration
+The output location of the browser build has been updated from "dist/olympic-games-starter" to "dist/olympic-games-starter/browser". You might need to adjust your deployment pipeline or, as an alternative, set outputPath.browser to "" in order to maintain the previous functionality.
+UPDATE angular.json (3275 bytes)
+UPDATE tsconfig.json (931 bytes)
+Migration completed (2 files modified).
+
+### ** Executing migrations of package '@angular/core' **
+
+> Updates two-way bindings that have an invalid expression to use the longform expression instead.
+Migration completed (No changes made).
+
+> Replace deprecated HTTP related modules with provider functions.
+UPDATE src/app/app.module.ts (672 bytes)
+Migration completed (1 file modified).
+
+> Updates calls to afterRender with an explicit phase to the new API.
+Migration completed (No changes made).
