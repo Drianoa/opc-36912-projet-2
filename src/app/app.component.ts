@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { take } from 'rxjs';
 import { OlympicService } from './core/services/olympic.service';
 import { RouterOutlet } from '@angular/router';
@@ -10,8 +10,8 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  constructor(private olympicService: OlympicService) {
-  }
+  private olympicService = inject(OlympicService);
+
 
   ngOnInit(): void {
     this.olympicService.loadInitialData().pipe(take(1)).subscribe();

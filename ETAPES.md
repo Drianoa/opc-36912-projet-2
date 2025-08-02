@@ -17,11 +17,17 @@ Une fois la partie automatisée terminée, il faut suivre le guide de migration
 
 [exemple](https://v19.angular.dev/update-guide?v=14.0-15.0&l=1)
 
-## Migration de NgModules à Standalone
+### Migration de NgModules à Standalone
 
 Documentation angular :
 [Migration standalone](https://angular.dev/reference/migrations/standalone)
 
 Après avoir appliqué les modifications automatiques, le routeur, l'app.config ont été adaptés manuellement.
+
+### Migration vers inject au lieu de l'injection par constructeur
+
+Assure la consistance entre le type qui reçoit le service injecté et le service
+
+[Migration inject](https://v19.angular.dev/reference/migrations/inject-function)
 
 

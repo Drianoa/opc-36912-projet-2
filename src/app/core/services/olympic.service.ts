@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -7,11 +7,10 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class OlympicService {
+  private http = inject(HttpClient);
+
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<any>(undefined);
-
-  constructor(private http: HttpClient) {
-  }
 
   loadInitialData() {
     return this.http.get<any>(this.olympicUrl).pipe(
