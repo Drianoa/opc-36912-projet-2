@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {LegendPosition, NgxChartsModule} from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-global-chart',
+  selector: 'app-dashboard',
   imports: [CommonModule, NgxChartsModule],
   templateUrl: './global-chart.component.html',
   styleUrl: './global-chart.component.scss'
