@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  imports: [AsyncPipe]
 })
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<any> = of(null);
+  private olympicService = inject(OlympicService);
 
-  constructor(private olympicService: OlympicService) {}
+  public olympics$: Observable<any> = of(null);
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
