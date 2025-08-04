@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LegendPosition, NgxChartsModule} from '@swimlane/ngx-charts';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OlympicService } from '../../../core/services/olympic.service';
+import { Observable } from 'rxjs';
+import { PieEntry } from '../../../core/models/PieEntry';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,34 +12,20 @@ import {LegendPosition, NgxChartsModule} from '@swimlane/ngx-charts';
   styleUrl: './global-chart.component.scss'
 })
 export class GlobalChartComponent {
-  single: any[] = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
+
+  private olympicService = inject(OlympicService)
+
+  pieValues$!: Observable<PieEntry[] | undefined>;
 
   view: [number, number] = [700, 400];
 
   // options
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = true;
-  legendPosition: LegendPosition = LegendPosition.Below;
+  gradient = true;
 
   colorScheme = "cool";
 
   constructor() {
-    Object.assign(this, {single: [...this.single]});
+    this.pieValues$ = this.olympicService.getOlympicsPieData()
   }
 
   onSelect(event: any): void {
