@@ -1,22 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { OlympicService } from 'src/app/core/services/olympic.service';
-import { AsyncPipe } from '@angular/common';
-import { Olympic } from '../../core/models/Olympic';
+import { Component } from '@angular/core';
+import { ChartHeaderComponent } from '../../dashboard/components/chart-header/chart-header.component';
+import { GlobalChartComponent } from '../../dashboard/components/global-chart/global-chart.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [AsyncPipe],
+  imports: [ChartHeaderComponent, GlobalChartComponent],
   standalone: true
 })
-export class HomeComponent implements OnInit {
-  private olympicService = inject(OlympicService);
-
-  public olympics$: Observable<Olympic[] | null | undefined> = of(null);
-
-  ngOnInit(): void {
-    this.olympics$ = this.olympicService.getOlympics();
-  }
+export class HomeComponent {
 }
