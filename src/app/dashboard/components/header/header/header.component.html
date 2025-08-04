@@ -4,11 +4,11 @@
     <div class="stats-container">
       <div class="stat-card">
         <p class="stat-label">Number of JOs</p>
-        <span class="stat-value">10</span>
+        <span class="stat-value">{{ games$ | async }}</span>
       </div>
       <div class="stat-card">
         <p class="stat-label">Number of countries</p>
-        <span class="stat-value">10</span>
+        <span class="stat-value">{{ countrys$ | async }}</span>
       </div>
     </div>
   </div>
