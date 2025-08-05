@@ -1,13 +1,7 @@
 <header class="header-content">
   <p class="header-title">Medals per Country</p>
   <div class="stats-container">
-    <div class="stat-card">
-      <p class="stat-label">Number of JOs</p>
-      <span class="stat-value">{{ games$ | async }}</span>
-    </div>
-    <div class="stat-card">
-      <p class="stat-label">Number of countries</p>
-      <span class="stat-value">{{ countrys$ | async }}</span>
-    </div>
+    <app-stat-card label="Number of JOs" [value]="games$ | async"></app-stat-card>
+    <app-stat-card label="Number of countries" [value]="countrys$ | async"></app-stat-card>
   </div>
 </header>
