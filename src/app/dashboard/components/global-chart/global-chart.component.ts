@@ -4,6 +4,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { OlympicService } from '../../../core/services/olympic.service';
 import { Observable } from 'rxjs';
 import { PieEntry } from '../../../core/models/PieEntry';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ import { PieEntry } from '../../../core/models/PieEntry';
 })
 export class GlobalChartComponent {
 
+  private router = inject(Router)
   private olympicService = inject(OlympicService)
 
   pieValues$!: Observable<PieEntry[] | undefined>;
@@ -29,14 +31,6 @@ export class GlobalChartComponent {
   }
 
   onSelect(event: any): void {
-    console.log('Item selected', event);
-  }
-
-  onActivate(event: any): void {
-    console.log('Activate', event);
-  }
-
-  onDeactivate(event: any): void {
-    console.log('Deactivate', event);
+    this.router.navigate(['country', event.name])
   }
 }

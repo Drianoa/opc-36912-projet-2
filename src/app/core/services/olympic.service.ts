@@ -40,12 +40,12 @@ export class OlympicService {
 
   getOlympicGamesNumber() {
     return this.getOlympics().pipe(
-      // Le nombre de jeux est égale au nombre d'années différentes de chaque l'ensemble des pays
-      map((value) => value?.map((country) => country.participations)
-        .flat()
-        .map((participation) => participation.year)
-        .filter((year, index, array) => array.indexOf(year) === index)
-        .length)
+      // Le nombre de jeux est égal au nombre d'années différentes de l'ensemble des pays
+      map((value) =>
+        new Set(value?.flatMap((country) =>
+          country.participations?.map((p) => p.year) || [])
+        ).size
+      )
     )
   }
 
@@ -57,6 +57,30 @@ export class OlympicService {
           name: country.country,
           value: country.participations.reduce((acc, participation) => acc + participation.medalsCount, 0)
         })))
+    )
+  }
+
+  getOlympicByName(name: string): Observable<Olympic> {
+    return this.getOlympics().pipe(
+      map((value) => value?.find((c) => c.country === name) || {} as Olympic)
+    )
+  }
+
+  getNumberOfEntries(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value.participations.length)
+    )
+  }
+
+  getTotalNumberOfMedals(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value.participations.reduce((acc, participation) => acc + participation.medalsCount, 0))
+    )
+  }
+
+  getTotalNumberOfAthletes(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value.participations.reduce((acc, participation) => acc + participation.athleteCount, 0))
     )
   }
 }
