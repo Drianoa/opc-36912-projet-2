@@ -1,4 +1,6 @@
-<div class="content">
-  <app-chart-header/>
-  <app-dashboard/>
-</div>
+<app-chart-header title="Medals per Country">
+  <app-stat-card label="Number of JOs" [value]="games$ | async"></app-stat-card>
+  <app-stat-card label="Number of countries" [value]="countrys$ | async"></app-stat-card>
+</app-chart-header>
+<app-dashboard/>
+

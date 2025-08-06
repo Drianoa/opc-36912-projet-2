@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { OlympicService } from '../../../core/services/olympic.service';
 import { Observable } from 'rxjs';
-import { PieEntry } from '../../../core/models/PieEntry';
 import { Router } from '@angular/router';
+import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +17,7 @@ export class GlobalChartComponent {
   private router = inject(Router)
   private olympicService = inject(OlympicService)
 
-  pieValues$!: Observable<PieEntry[] | undefined>;
+  pieValues$!: Observable<DataItem[] | undefined>;
 
   view: [number, number] = [700, 400];
 

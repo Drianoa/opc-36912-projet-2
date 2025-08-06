@@ -10,9 +10,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'country/:countryId',
+    path: 'country/:id',
     component: CountryDetailComponent,
-
+  }, {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
   {
     path: '**', // wildcard

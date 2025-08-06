@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
-import { PieEntry } from '../models/PieEntry';
+import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +49,7 @@ export class OlympicService {
     )
   }
 
-  getOlympicsPieData(): Observable<PieEntry[] | undefined> {
+  getOlympicsPieData(): Observable<DataItem[] | undefined> {
     return this.getOlympics().pipe(
       // Le nombre de jeux est égale au nombre d'années différentes de chaque l'ensemble des pays
       map((value) =>
@@ -60,27 +60,29 @@ export class OlympicService {
     )
   }
 
-  getOlympicByName(name: string): Observable<Olympic> {
+  getOlympicByName(name: string): Observable<Olympic | undefined> {
     return this.getOlympics().pipe(
-      map((value) => value?.find((c) => c.country === name) || {} as Olympic)
+      map((value) => value?.find((c) => {
+        return c.country === name
+      }))
     )
   }
 
   getNumberOfEntries(name: string): Observable<number> {
     return this.getOlympicByName(name).pipe(
-      map((value) => value.participations.length)
+      map((value) => value?.participations.length || 0)
     )
   }
 
   getTotalNumberOfMedals(name: string): Observable<number> {
     return this.getOlympicByName(name).pipe(
-      map((value) => value.participations.reduce((acc, participation) => acc + participation.medalsCount, 0))
+      map((value) => value?.participations.reduce((acc, participation) => acc + participation.medalsCount, 0) || 0)
     )
   }
 
   getTotalNumberOfAthletes(name: string): Observable<number> {
     return this.getOlympicByName(name).pipe(
-      map((value) => value.participations.reduce((acc, participation) => acc + participation.athleteCount, 0))
+      map((value) => value?.participations.reduce((acc, participation) => acc + participation.athleteCount, 0) || 0)
     )
   }
 }
