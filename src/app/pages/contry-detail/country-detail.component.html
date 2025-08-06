@@ -3,3 +3,8 @@
   <app-stat-card label="Number of entries" [value]="numberOfEntries$ | async"></app-stat-card>
   <app-stat-card label="Number of medals" [value]="totalNumberOfMedals$ | async"></app-stat-card>
 </app-chart-header>
+<app-charts>
+  @if (participations$ | async; as participations) {
+    <app-country-chart [participations]="participations"/>
+  }
+</app-charts>

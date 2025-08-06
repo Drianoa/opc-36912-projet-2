@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { OlympicService } from '../../../core/services/olympic.service';
+import { OlympicService } from '../../../../core/services/olympic.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-global-chart',
   imports: [CommonModule, NgxChartsModule],
   templateUrl: './global-chart.component.html',
   styleUrl: './global-chart.component.scss'
