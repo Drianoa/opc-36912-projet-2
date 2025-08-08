@@ -1,0 +1,8 @@
+@if (olympicSeries) {
+  <ngx-charts-line-chart
+    [view]="view"
+    [results]="olympicSeries"
+  />
+} @else {
+  <p>Pas de participations pour ce pays</p>
+}

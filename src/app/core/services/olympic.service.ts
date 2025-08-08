@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Olympic } from '../models/Olympic';
+import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +12,10 @@ export class OlympicService {
   private http = inject(HttpClient);
 
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[] | null | undefined>(undefined);
 
   loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
+    return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
       catchError((error, caught) => {
         // TODO: improve error handling
@@ -27,5 +29,60 @@ export class OlympicService {
 
   getOlympics() {
     return this.olympics$.asObservable();
+  }
+
+  getOlympicCountrysNumber() {
+    return this.getOlympics().pipe(
+      // Le nombre de pays est égale à la taille de la liste
+      map((value) => value?.length)
+    )
+  }
+
+  getOlympicGamesNumber() {
+    return this.getOlympics().pipe(
+      // Le nombre de jeux est égal au nombre d'années différentes de l'ensemble des pays
+      map((value) =>
+        new Set(value?.flatMap((country) =>
+          country.participations?.map((p) => p.year) || [])
+        ).size
+      )
+    )
+  }
+
+  getOlympicsPieData(): Observable<DataItem[] | undefined> {
+    return this.getOlympics().pipe(
+      // Le nombre de jeux est égale au nombre d'années différentes de chaque l'ensemble des pays
+      map((value) =>
+        value?.map((country) => ({
+          name: country.country,
+          value: country.participations.reduce((acc, participation) => acc + participation.medalsCount, 0)
+        })))
+    )
+  }
+
+  getOlympicByName(name: string): Observable<Olympic | undefined> {
+    return this.getOlympics().pipe(
+      map((value) => value?.find((c) => {
+        return c.country === name
+      }))
+    )
+  }
+
+  getNumberOfEntries(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value?.participations.length || 0)
+    )
+  }
+
+  getTotalNumberOfMedals(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value?.participations.reduce((acc, participation) => acc + participation.medalsCount, 0) || 0)
+    )
+  }
+
+  getTotalNumberOfAthletes(name: string): Observable<number> {
+    return this.getOlympicByName(name).pipe(
+      map((value) => value?.participations.reduce((acc, participation) => acc + participation.athleteCount, 0) || 0)
+    )
   }
 }

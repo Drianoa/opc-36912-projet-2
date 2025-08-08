@@ -1,0 +1,19 @@
+// Permet d'écraser le style du tooltip
+
+::ng-deep ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
+  .tooltip-caret.position-top {
+    border-top-color: var(--main-bg-color);
+  }
+
+  background-color: var(--main-bg-color);
+}
+
+::ng-deep text.pie-label {
+  fill: var(--main-text-color);
+  font-size: 0.9rem;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+}

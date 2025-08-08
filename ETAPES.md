@@ -30,4 +30,9 @@ Assure la consistance entre le type qui reçoit le service injecté et le servic
 
 [Migration inject](https://v19.angular.dev/reference/migrations/inject-function)
 
+## Implementation
 
+### Etape 2 typage des composantes
+
+1. Définition des types de Olympic et Participation
+2. Utilisation des types dans olympic.service

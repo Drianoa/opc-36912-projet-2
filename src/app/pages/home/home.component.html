@@ -1,3 +1,8 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<app-chart-header title="Medals per Country">
+  <app-stat-card label="Number of JOs" [value]="games$ | async"></app-stat-card>
+  <app-stat-card label="Number of countries" [value]="countrys$ | async"></app-stat-card>
+</app-chart-header>
+<app-charts>
+  <app-global-chart/>
+</app-charts>
+

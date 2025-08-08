@@ -1,0 +1,5 @@
+<div class="stat-card">
+  <p class="stat-label">{{ label }}</p>
+  <span
+    class="stat-value">{{ value === null || value === undefined || value === '' || isNaN(+value) ? '-' : (value | number:'1.0-0') }}</span>
+</div>

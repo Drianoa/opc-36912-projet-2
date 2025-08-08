@@ -1,7 +1,13 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { loadingInterceptorInterceptor } from './core/interceptors/loading-interceptor.interceptor';
+
+registerLocaleData(localeFr);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -9,7 +15,17 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(
       routes,
+      withComponentInputBinding()
     ),
-    provideHttpClient()
+    provideHttpClient(
+      withInterceptors([
+        loadingInterceptorInterceptor
+      ])
+    ),
+    provideAnimations(),
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr-FR',
+    }
   ]
 };
