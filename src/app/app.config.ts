@@ -13,7 +13,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     //
     provideZoneChangeDetection({eventCoalescing: true}),
-    provideAnimations(),
     provideRouter(
       routes,
       withComponentInputBinding()
@@ -23,6 +22,7 @@ export const appConfig: ApplicationConfig = {
         loadingInterceptorInterceptor
       ])
     ),
+    provideAnimations(),
     {
       provide: LOCALE_ID,
       useValue: 'fr-FR',

@@ -4,7 +4,9 @@
   <app-stat-card label="Number of medals" [value]="totalNumberOfMedals$ | async"></app-stat-card>
 </app-chart-header>
 <app-charts>
-  @if (participations$ | async; as participations) {
-    <app-country-chart [participations]="participations"/>
+  @if (chartSeries$ | async; as chartSeries) {
+    <app-country-chart
+      [olympicSeries]="chartSeries">
+    </app-country-chart>
   }
 </app-charts>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LineChartModule } from '@swimlane/ngx-charts';
-import { Participation } from '../../../../core/models/Participation';
+import {Series} from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Component({
   selector: 'app-country-chart',
@@ -11,6 +11,6 @@ import { Participation } from '../../../../core/models/Participation';
   styleUrl: './country-chart.component.scss'
 })
 export class CountryChartComponent {
-  @Input() participations: Participation[] = []
+  @Input() olympicSeries!: Series
   view: [number, number] = [700, 400];
 }
