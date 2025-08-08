@@ -1,12 +1,12 @@
-<app-chart-header [title]="countryName">
+<app-chart-header [title]="countryName$ | async">
   <app-stat-card label="Number of athletes" [value]="totalNumberOfAthletes$ | async"></app-stat-card>
   <app-stat-card label="Number of entries" [value]="numberOfEntries$ | async"></app-stat-card>
   <app-stat-card label="Number of medals" [value]="totalNumberOfMedals$ | async"></app-stat-card>
 </app-chart-header>
 <app-charts>
-  @if (chartSeries$ | async; as chartSeries) {
-    <app-country-chart
-      [olympicSeries]="chartSeries">
-    </app-country-chart>
-  }
+  <!--  @if (chartSeries$ | async; as chartSeries) {-->
+  <!--    <app-country-chart-->
+  <!--      [olympicSeries]="chartSeries">-->
+  <!--    </app-country-chart>-->
+  <!--  }-->
 </app-charts>

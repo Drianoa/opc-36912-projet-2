@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./chart-header.component.scss']
 })
 export class ChartHeaderComponent {
-  @Input() title: string = '';
+  @Input() title: string | null = '';
 }

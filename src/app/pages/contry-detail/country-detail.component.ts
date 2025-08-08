@@ -1,22 +1,20 @@
 import { Component, inject, Input } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import { OlympicService } from '../../core/services/olympic.service';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ChartHeaderComponent } from '../../dashboard/components/chart-header/chart-header.component';
 import { StatCardComponent } from '../../dashboard/components/chart-header/stat-card/stat-card.component';
-import { CountryChartComponent } from '../../dashboard/components/charts/country-chart/country-chart.component';
 import { ChartsComponent } from '../../dashboard/components/charts/charts.component';
 import { Olympic } from '../../core/models/Olympic';
 import { Series } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Component({
-  selector: 'app-contry-detail',
+  selector: 'app-country-detail',
   imports: [
     StatCardComponent,
     AsyncPipe,
     ChartHeaderComponent,
-    CountryChartComponent,
     ChartsComponent
   ],
   templateUrl: './country-detail.component.html',
@@ -25,46 +23,55 @@ import { Series } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 export class CountryDetailComponent {
   private olympicService = inject(OlympicService)
   private router = inject(Router)
-  totalNumberOfMedals$ = of(0)
-  totalNumberOfAthletes$ = of(0)
-  numberOfEntries$ = of(0)
-  chartSeries$!: Observable<Series>
-  countryName = ''
+
+  private idSubject$ = new BehaviorSubject<string | null>(null);
+  private id$ = this.idSubject$.asObservable();
+
+  olympic$: Observable<Olympic> = this.id$.pipe(
+    switchMap(id => id ? this.olympicService.getOlympicByName(id) : of(undefined)),
+    tap(olympic => {
+      if (!olympic) {
+        this.router.navigateByUrl('/not-found');
+      }
+    }),
+    filter((olympic): olympic is Olympic => olympic !== undefined)
+  );
+
+  totalNumberOfMedals$ = this.olympic$.pipe(
+    switchMap(olympic => olympic ? this.olympicService.getTotalNumberOfMedals(olympic.country) : of(0))
+  );
+
+  totalNumberOfAthletes$ = this.olympic$.pipe(
+    switchMap(olympic => olympic ? this.olympicService.getTotalNumberOfAthletes(olympic.country) : of(0))
+  );
+
+  numberOfEntries$ = this.olympic$.pipe(
+    switchMap(olympic => olympic ? this.olympicService.getNumberOfEntries(olympic.country) : of(0))
+  );
+
+  // chartSeries$: Observable<Series> = this.olympic$.pipe(
+  //   map(olympic => this.mapToChartData(olympic)),
+  //   tap(data => console.log(`chart data:`, data))
+  // );
+
+  countryName$: Observable<string> = this.olympic$.pipe(
+    map(olympic => olympic.country)
+  );
 
   @Input()
   set id(value: string) {
-
-    this.olympicService.getOlympicByName(value)
-      .pipe(
-        tap((value) => console.log(value))
-      )
-      .subscribe(olympic => {
-
-        if (!olympic) {
-          this.router.navigateByUrl('/not-found');
-        } else {
-          console.log(olympic)
-          this.countryName = olympic.country;
-          this.totalNumberOfMedals$ = this.olympicService.getTotalNumberOfMedals(value)
-          this.totalNumberOfAthletes$ = this.olympicService.getTotalNumberOfAthletes(value)
-          this.numberOfEntries$ = this.olympicService.getNumberOfEntries(value)
-          this.chartSeries$ = this.olympicService.getOlympicByName(value)
-            .pipe(
-              map(olympic => this.mapToChartData(olympic)),
-              tap(data => console.log(data))
-            )
-        }
-      });
+    console.log(`input received: ${value}`);
+    this.idSubject$.next(value);
   }
 
+
   mapToChartData(olympic: Olympic): Series {
-    console.log(olympic)
     return {
-      name: olympic?.country,
-      series: olympic?.participations.map(participation => ({
-        name: participation.year,
+      name: olympic.country ?? '',
+      series: olympic.participations.map(participation => ({
+        name: participation.year.toString(), // Assurez-vous que 'name' est une chaîne
         value: participation.medalsCount
-      }))
+      })) ?? []
     };
   }
 }
