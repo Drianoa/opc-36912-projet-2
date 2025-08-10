@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ChartHeaderComponent } from '../../dashboard/components/chart-header/chart-header.component';
 import { GlobalChartComponent } from '../../dashboard/components/charts/global-chart/global-chart.component';
 import { OlympicService } from '../../core/services/olympic.service';
@@ -12,8 +12,13 @@ import { ChartsComponent } from '../../dashboard/components/charts/charts.compon
   styleUrls: ['./home.component.scss'],
   imports: [ChartHeaderComponent, GlobalChartComponent, AsyncPipe, StatCardComponent, ChartsComponent],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private olympicService = inject(OlympicService);
   countrys$ = this.olympicService.getOlympicCountrysNumber();
   games$ = this.olympicService.getOlympicGamesNumber();
+
+
+  ngOnInit(): void {
+    this.olympicService.loadInitialData().subscribe();
+  }
 }

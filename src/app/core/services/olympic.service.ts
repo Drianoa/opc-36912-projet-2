@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, map, Observable, shareReplay } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
 import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
@@ -12,20 +12,20 @@ export class OlympicService {
   private http = inject(HttpClient);
 
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<Olympic[] | null | undefined>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[] | null>(null);
 
-  loadInitialData() {
+  loadInitialData(): Observable<Olympic[]> {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
-      tap((value) => this.olympics$.next(value)),
-      catchError((error, caught) => {
-        // TODO: improve error handling
-        console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
-        this.olympics$.next(null);
-        return caught;
+      tap({
+        next: data => this.olympics$.next(data),
+        error: err => {
+          console.error('Erreur lors du chargement des données', err);
+          this.olympics$.next([]);
+        }
       })
     );
   }
+
 
   getOlympics() {
     return this.olympics$.asObservable();
@@ -42,10 +42,11 @@ export class OlympicService {
     return this.getOlympics().pipe(
       // Le nombre de jeux est égal au nombre d'années différentes de l'ensemble des pays
       map((value) =>
-        new Set(value?.flatMap((country) =>
-          country.participations?.map((p) => p.year) || [])
+        new Set(value?.flatMap(country =>
+          country.participations?.map(p => p.year) || [])
         ).size
-      )
+      ),
+      shareReplay(1)
     )
   }
 
@@ -62,9 +63,7 @@ export class OlympicService {
 
   getOlympicByName(name: string): Observable<Olympic | undefined> {
     return this.getOlympics().pipe(
-      map((value) => value?.find((c) => {
-        return c.country === name
-      }))
+      map((list) => list?.find((c) => c.country === name))
     )
   }
 

@@ -1,7 +1,13 @@
 @if (olympicSeries) {
   <ngx-charts-line-chart
-    [view]="view"
+    [view]="view()"
     [results]="olympicSeries"
+    [scheme]="colorScheme"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [showXAxisLabel]="showXAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [autoScale]="autoScale"
   />
 } @else {
   <p>Pas de participations pour ce pays</p>

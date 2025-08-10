@@ -3,4 +3,13 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  //align-self: center;
+  max-width: 70rem;
+  width: 100%;
+  // ajoute les marges sur le coté afin de centrer l'élement
+  margin: 0 auto;
+  // prendre toute la hauteur
+  min-height: 100vh;
+
+  box-sizing: border-box;
 }
