@@ -1,3 +1,4 @@
+@use '../../../../variables' as *;
 
 .header {
   &-content {
@@ -31,7 +32,7 @@
 
 
 // Responsive styles
-@media (max-width: var(--mobile-width)) {
+@media (max-width: $mobile-width) {
   .stats-container {
     flex-direction: column;
     align-items: center;
