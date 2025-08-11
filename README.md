@@ -1,29 +1,57 @@
 # OlympicGamesStarter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Ce projet permet de visualiser les statistiques des jeux olympiques depuis par pays
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Prérequis
 
-## Development server
+- Avoir installé node 22.18.0 et supérieur.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Pour verifier votre version de node, entrez la commande suivante dans votre terminal :
 
-## Build
+```
+node --version
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Where to start
+Pour installer ce projet entrez la commande suivante dans votre terminal dans le dossier du projet :
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+```
+npm install
+```
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+## Execution
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+Pour executer ce projet entrez la commande suivante dans votre terminal dans le dossier du projet :
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+```
+npm start
+```
 
-You're now ready to implement the requested features.
+## Documentation
 
-Good luck!
+Ce projet utilise Angular 19, pour plus d'information sur Angular, rendez-vous sur [Angular.io](https://angular.io/).
+
+### Architecture
+
+Arborescence du projet :
+
+```
+core
+  components      # Les composants communs aux pages
+  services        # Contient les services
+  interceptors    # Les intercepteurs Http
+  models          # Les differents types/interfaces utilisé par le projet
+dashboard
+  components      # Les composants principaux appelé par les pages 
+pages             # Les pages du projet qui suit la strucutre des urls
+
+```
+
+### Spécificités
+
+Le projet a été retravaillé de facon à fonctionner avec des composants standalone.
+
+Les services sont injecté avec inject au lieu de l'injection par constructeur.
+
+Eslint a été activé sur ce projet afin de garantir une certaine qualité du code et du respect des bonnes pratiques.
