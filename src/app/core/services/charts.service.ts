@@ -11,7 +11,7 @@ export class ChartsService {
 
   setChartSize(maxWidth: number, maxHeight: number) {
     const newSize = this.calculateChartSize(maxWidth, maxHeight);
-    this.chartSizeSignal.update(_ => newSize);
+    this.chartSizeSignal.update(() => newSize);
   }
 
   /**

@@ -12,14 +12,14 @@ export class ModalService {
   errorModalVisible = this.showErrorModal.asReadonly();
 
   toogleLoadingModal(shouldShow: boolean) {
-    this.showLoadingModal.update((_) => shouldShow);
+    this.showLoadingModal.update(() => shouldShow);
   }
 
   displayErrorModal() {
-    this.showErrorModal.update((_) => true);
+    this.showErrorModal.update(() => true);
   }
 
   hideErrorModal() {
-    this.showErrorModal.update((_) => false);
+    this.showErrorModal.update(() => false);
   }
 }

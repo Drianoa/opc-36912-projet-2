@@ -29,7 +29,8 @@ export class GlobalChartComponent {
     this.pieValues$ = this.olympicService.getOlympicsPieData()
   }
 
-  onSelect(event: any): void {
+  onSelect(event: DataItem): void {
+    console.dir(event);
     this.router.navigate(['country', event.name])
   }
 }

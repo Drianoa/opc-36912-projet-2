@@ -1,8 +1,8 @@
-<div class="modal-overlay" (click)="closeModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay">
+  <div class="modal-content">
     <div class="modal-header">
       <h2 class="modal-title">{{ title }}</h2>
-      <button class="close-button" (click)="closeModal()" aria-label="Close">
+      <button class="close-button" (click)="closeModal()" aria-label="Close" (keyup.enter)="closeModal()">
         &times;
       </button>
     </div>
@@ -10,7 +10,7 @@
       <p class="error-message">{{ message }}</p>
     </div>
     <div class="modal-footer">
-      <button class="close-btn" (click)="closeModal()">
+      <button class="close-btn" (click)="closeModal()" (keyup.enter)="closeModal()">
         {{ buttonText }}
       </button>
     </div>

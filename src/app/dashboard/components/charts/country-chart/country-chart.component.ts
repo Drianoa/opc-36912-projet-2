@@ -18,9 +18,9 @@ export class CountryChartComponent {
   view: Signal<[number, number]> = this.chartService.chartSize
   
   colorScheme = "cool";
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Dates';
-  autoScale: boolean = true;
+  xAxis = true;
+  yAxis = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Dates';
+  autoScale = true;
 }
