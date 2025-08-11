@@ -1,26 +1,26 @@
+@import "../../../../variables";
+
 .back-button {
 
-  padding: 0.5rem 1rem;
-  background-color: var(--main-bg-color);
+  background-color: $main-bg-color;
   color: white;
   border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
+  border-radius: 6px;
+  padding: 0.6rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-1px);
+    background-color: darken($main-bg-color, 10%);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(1px);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--main-text-color);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem lighten($main-bg-color, 20%);
   }
 }
