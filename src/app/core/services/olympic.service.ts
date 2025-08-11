@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, shareReplay } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Olympic } from '../models/Olympic';
-import { DataItem } from '@swimlane/ngx-charts/lib/models/chart-data.model';
+import { DataItem, Series } from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,15 +14,16 @@ export class OlympicService {
   private olympics$ = new BehaviorSubject<Olympic[] | null>(null);
 
   loadInitialData(): Observable<Olympic[]> {
-    return this.http.get<Olympic[]>(this.olympicUrl).pipe(
-      tap({
-        next: data => this.olympics$.next(data),
-        error: err => {
-          console.error('Erreur lors du chargement des données', err);
-          this.olympics$.next([]);
-        }
-      })
-    );
+    return this.http.get<Olympic[]>(this.olympicUrl)
+      .pipe(
+        tap({
+          next: data => this.olympics$.next(data),
+          error: err => {
+            console.error('Erreur lors du chargement des données', err);
+            this.olympics$.next([]);
+          }
+        })
+      );
   }
 
 
@@ -45,8 +45,7 @@ export class OlympicService {
         new Set(value?.flatMap(country =>
           country.participations?.map(p => p.year) || [])
         ).size
-      ),
-      shareReplay(1)
+      )
     )
   }
 
@@ -63,7 +62,7 @@ export class OlympicService {
 
   getOlympicByName(name: string): Observable<Olympic | undefined> {
     return this.getOlympics().pipe(
-      map((list) => list?.find((c) => c.country === name))
+      map((list) => list?.find((c) => c.country === name)),
     )
   }
 
@@ -83,5 +82,15 @@ export class OlympicService {
     return this.getOlympicByName(name).pipe(
       map((value) => value?.participations.reduce((acc, participation) => acc + participation.athleteCount, 0) || 0)
     )
+  }
+
+  mapToChartData(olympic: Olympic): Series {
+    return {
+      name: olympic.country,
+      series: olympic.participations.map(participation => ({
+        name: participation.year.toString(),
+        value: participation.medalsCount
+      }))
+    };
   }
 }
