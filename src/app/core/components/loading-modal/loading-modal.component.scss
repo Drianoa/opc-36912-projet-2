@@ -49,7 +49,7 @@
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: var(--mobile-width)) {
   .loading-spinner {
     padding: 1.5rem;
     min-width: 160px;

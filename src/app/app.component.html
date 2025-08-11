@@ -1,8 +1,12 @@
 <div class="content">
-
-  <app-back-button/>
-  <router-outlet></router-outlet>
-  @if (loadingModalVisible()) {
-    <app-loading-modal></app-loading-modal>
+  @if (errorModalVisible()) {
+    <app-error-modal></app-error-modal>
+  } @else {
+    <app-back-button/>
+    <router-outlet></router-outlet>
+    @if (loadingModalVisible()) {
+      <app-loading-modal></app-loading-modal>
+    }
   }
+
 </div>
