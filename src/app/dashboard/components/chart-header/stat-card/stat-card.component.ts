@@ -10,7 +10,7 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './stat-card.component.scss'
 })
 export class StatCardComponent {
-  @Input() label: string = '';
+  @Input() label = '';
   @Input() value: number | string | null | undefined = null;
   protected readonly isNaN = isNaN;
 }

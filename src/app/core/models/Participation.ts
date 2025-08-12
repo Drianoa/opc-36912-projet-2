@@ -8,6 +8,9 @@
 }
 */
 
+/**
+ * Interface used to represent a Participation from the API contained in an Olympic.
+ */
 export interface Participation {
   id: number;
   year: number;

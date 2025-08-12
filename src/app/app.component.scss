@@ -1,6 +1,18 @@
+@use '../variables' as ds;
+
 .content {
-  background-color: #fff;
-  padding: 1.5rem;
+  background-color: ds.$main-bg-color;
+  // Pas de padding en bas de la page
+  padding: 1rem;
+  padding-bottom: 0;
   display: flex;
   flex-direction: column;
+  max-width: 70rem;
+  width: 100%;
+  // ajoute les marges sur le coté afin de centrer l'élement
+  margin: 0 auto;
+  // prendre toute la hauteur
+  min-height: 100vh;
+
+  box-sizing: border-box;
 }

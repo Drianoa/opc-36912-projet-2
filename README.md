@@ -1,29 +1,72 @@
-# OlympicGamesStarter
+# Olympic Games Statistics
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+| Auteur | Version |   Commentaire    |
+|:------:|:-------:|:----------------:|
+| MERLY  |   1.0   | Première version |
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Présentation
 
-## Development server
+Ce projet permet de visualiser les statistiques des Jeux olympiques par pays à travers une interface utilisateur intuitive.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prérequis
 
-## Build
+- **Node.js** : Version 22.18.0 ou supérieure.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Pour vérifier la version de Node.js installée, exécutez la commande suivante dans votre terminal :
 
-## Where to start
+```bash
+node --version
+```
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+## Installation
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+Pour installer les dépendances du projet, accédez au dossier du projet via votre terminal et exécutez :
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+```bash
+npm install
+```
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+## Exécution
 
-You're now ready to implement the requested features.
+Pour lancer le projet, accédez au dossier du projet via votre terminal et exécutez :
 
-Good luck!
+```bash
+npm start
+```
+
+## Documentation
+
+Ce projet est développé avec **Angular 19**. Pour plus d'informations, consultez la documentation officielle sur [Angular.io](https://angular.io/).
+
+Les graphiques sont générés à l'aide de la bibliothèque [ngx-charts](https://swimlane.github.io/ngx-charts/).
+
+### Architecture du projet
+
+L'arborescence du projet est organisée comme suit :
+
+```
+src/
+├── core/
+│   ├── components/       # Composants réutilisables partagés entre les pages
+│   ├── services/         # Services pour la logique métier
+│   ├── interceptors/     # Intercepteurs HTTP pour la gestion des requêtes
+│   ├── models/           # Types et interfaces utilisés dans le projet
+├── dashboard/
+│   ├── components/       # Composants principaux utilisés par les pages
+├── pages/                # Pages du projet, alignées sur la structure des routes (voir app.routes.ts)
+└── variables.scss        # Variables SCSS pour la gestion des styles
+```
+
+### Spécificités techniques
+
+- **Composants standalone** : Le projet utilise des composants autonomes pour une meilleure modularité.
+- **Injection de services** : Les services sont injectés via la fonction `inject` plutôt que par l'injection classique dans le constructeur.
+- **ESLint** : Activé pour garantir la qualité du code et le respect des bonnes pratiques.
+- **Styling** :
+  - Les styles sont basés sur une palette de couleurs définie dans les maquettes, centralisée dans `/src/variables.scss`.
+  - Utilisation de **CSS Flexbox** pour le positionnement des éléments.
+- **Tests unitaires** : Les tests unitaires ne sont pas implémentés dans ce projet.
+
+## Design
+
+Le design du projet repose sur une palette de couleurs cohérente, définie dans le fichier `/src/variables.scss`. L'utilisation de CSS Flexbox assure un placement précis et responsive des éléments à travers l'application.

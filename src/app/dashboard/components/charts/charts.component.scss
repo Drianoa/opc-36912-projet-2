@@ -1,19 +1,29 @@
+@use "../../../../variables" as ds;
 // Permet d'écraser le style du tooltip
 
 ::ng-deep ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
   .tooltip-caret.position-top {
-    border-top-color: var(--main-bg-color);
+    border-top-color: ds.$secondary-bg-color;
   }
 
-  background-color: var(--main-bg-color);
+  .tooltip-caret.position-right {
+    border-right-color: ds.$secondary-bg-color;
+  }
+
+  .tooltip-caret.position-left {
+    border-left-color: ds.$secondary-bg-color;
+  }
+
+  background-color: ds.$secondary-bg-color;
 }
 
 ::ng-deep text.pie-label {
-  fill: var(--main-text-color);
+  fill: ds.$secondary-text-color;
   font-size: 0.9rem;
 }
 
 .chart-container {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
