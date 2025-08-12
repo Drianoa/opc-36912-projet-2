@@ -10,7 +10,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'country/:id',
+    path: 'country/:name',
     component: CountryDetailComponent,
   }, {
     path: 'not-found',

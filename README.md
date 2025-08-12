@@ -1,5 +1,9 @@
 # OlympicGamesStarter
 
+| Auteur | Version |   Commentaire    |
+|:------:|:-------:|:----------------:|
+| MERLY  |   1.0   | Première version |
+
 Ce projet permet de visualiser les statistiques des jeux olympiques depuis par pays
 
 ## Prérequis
@@ -32,6 +36,8 @@ npm start
 
 Ce projet utilise Angular 19, pour plus d'information sur Angular, rendez-vous sur [Angular.io](https://angular.io/).
 
+Il utilise également [ngx-charts](https://swimlane.github.io/ngx-charts/) pour les graphiques.
+
 ### Architecture
 
 Arborescence du projet :
@@ -44,7 +50,7 @@ core
   models          # Les differents types/interfaces utilisé par le projet
 dashboard
   components      # Les composants principaux appelé par les pages 
-pages             # Les pages du projet qui suit la strucutre des urls
+pages             # Les pages du projet qui suit la strucutre des urls en concordance avec app.routes.ts
 
 ```
 
@@ -54,4 +60,4 @@ Le projet a été retravaillé de facon à fonctionner avec des composants stand
 
 Les services sont injecté avec inject au lieu de l'injection par constructeur.
 
-Eslint a été activé sur ce projet afin de garantir une certaine qualité du code et du respect des bonnes pratiques.
+Eslint a été activé sur ce projet afin de garantir une certaine qualité du code et le respect des bonnes pratiques.

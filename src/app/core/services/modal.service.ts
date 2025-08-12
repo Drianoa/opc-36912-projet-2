@@ -1,5 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 
+
+/**
+ * Service that controls the visibility of the loading and error modals.
+ */
 @Injectable({
   providedIn: 'root'
 })

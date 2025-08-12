@@ -28,14 +28,14 @@ export class CountryDetailComponent implements OnInit {
   private route = inject(ActivatedRoute)
 
   private idSubject$ = new BehaviorSubject<string | null>(null);
-  private id$ = this.idSubject$.asObservable();
+  private name$ = this.idSubject$.asObservable();
 
-  olympic$: Observable<Olympic> = this.id$.pipe(
-    filter((id): id is string => !!id), // On attend un id valide
-    switchMap(id => this.olympicService.getOlympicByName(decodeURIComponent(id))),
+  olympic$: Observable<Olympic> = this.name$.pipe(
+    filter((name): name is string => !!name), // On attend un id valide
+    switchMap(name => this.olympicService.getOlympicByName(decodeURIComponent(name))),
     tap(olympic => {
       if (!olympic) {
-        console.warn('Olympic not found for id:', this.idSubject$.value);
+        console.warn('Olympic not found for name:', this.idSubject$.value);
         this.router.navigate(['not-found']);
       }
     }),
@@ -60,8 +60,8 @@ export class CountryDetailComponent implements OnInit {
     map(data => [data]),
   );
 
-  countryName$: Observable<string> = this.id$.pipe(
-    filter((id): id is string => !!id)
+  countryName$: Observable<string> = this.name$.pipe(
+    filter((name): name is string => !!name)
   );
 
   ngOnInit(): void {
@@ -69,8 +69,8 @@ export class CountryDetailComponent implements OnInit {
     this.olympicService.loadInitialData().pipe(
       switchMap(() => this.route.paramMap
         .pipe(
-          map(params => params.get('id')),
-          tap(id => this.idSubject$.next(id))
+          map(params => params.get('name')),
+          tap(name => this.idSubject$.next(name))
         )
       ),
     ).subscribe();
