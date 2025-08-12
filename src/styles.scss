@@ -1,13 +1,35 @@
 @use 'variables' as ds;
+@use "sass:color";
 
 :root {
-  //--main-bg-color: #{ds.$secondary-bg-color};
-  //--main-text-color: #{ds.$secondary-text-color};
-  //--number-text-color: #{ds.$number-text-color};
   font-family: #{ds.$main-font-family};
   font-size: #{ds.$base-font-size};
 }
 
 body {
   margin: 0;
+}
+
+.olympic-button {
+  background-color: ds.$secondary-bg-color;
+  color: ds.$main-text-color;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.adjust(ds.$secondary-bg-color, $lightness: -10%);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem color.adjust(ds.$secondary-bg-color, $lightness: 20%);
+  }
 }

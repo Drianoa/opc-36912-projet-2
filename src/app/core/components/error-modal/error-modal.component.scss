@@ -59,27 +59,17 @@
   display: flex;
   justify-content: flex-end;
 
-  .close-btn {
-    background-color: ds.$error-color;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
 
-    &:hover {
-      background-color: color.adjust(ds.$error-color, $lightness: -10%);
-    }
+}
 
-    &:active {
-      transform: translateY(1px);
-    }
+.close-btn {
+  background-color: ds.$error-color;
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 0.2rem color.adjust(ds.$error-color, $alpha: 0.5);
-    }
+  &:hover {
+    background-color: color.adjust(ds.$error-color, $lightness: -10%);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem color.adjust(ds.$error-color, $alpha: 0.5);
   }
 }
