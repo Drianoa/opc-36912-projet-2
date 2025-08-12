@@ -1,9 +1,10 @@
 .content {
   background-color: #fff;
-  padding: 1.5rem;
+  // Pas de padding en bas de la page
+  padding: 1rem;
+  padding-bottom: 0;
   display: flex;
   flex-direction: column;
-  //align-self: center;
   max-width: 70rem;
   width: 100%;
   // ajoute les marges sur le coté afin de centrer l'élement

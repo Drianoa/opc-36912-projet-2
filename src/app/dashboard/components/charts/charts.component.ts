@@ -52,11 +52,12 @@ export class ChartsComponent implements AfterViewInit, OnDestroy {
     const containerRect = container.getBoundingClientRect();
 
     // Calculer la hauteur maximale disponible
-    const maxHeight = window.innerHeight - containerRect.top
-    const containerWidth = container.clientWidth
+    const maxHeight = window.innerHeight - containerRect.top;
+    const maxWidth = containerRect.width
+    console.log([maxWidth, maxHeight])
 
-    if (containerWidth > 0 && maxHeight > 0) {
-      this.chartSizeService.setChartSize(containerWidth, maxHeight);
+    if (maxWidth > 0 && maxHeight > 0) {
+      this.chartSizeService.setChartSize(maxWidth, maxHeight);
     }
   }
 }

@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class ChartsService {
   private chartSizeSignal = signal<[number, number]>([700, 400]);
-  private factor = 1.75;
+  private ratio = 1.75;
 
   chartSize = this.chartSizeSignal.asReadonly();
 
@@ -16,17 +16,14 @@ export class ChartsService {
 
   /**
    * Calculate the new width and height based on the maximum width and height.
-   * New with and Height should not be greater than max width and max height depending on factor
-   * @param maxWidth
-   * @param maxHeight
+   * New with and Height should not be greater than max width and max height depending on ratio but minimum 200px
    * @private
    */
   private calculateChartSize(maxWidth: number, maxHeight: number): [number, number] {
-    const calcHeightIfMaxWidth = maxWidth / this.factor;
-
-    if (calcHeightIfMaxWidth < maxHeight) {
-      return [maxWidth, calcHeightIfMaxWidth];
-    }
-    return [maxWidth * this.factor, maxHeight];
+    let newHeight = Math.min(maxHeight, maxWidth / this.ratio);
+    newHeight = Math.max(newHeight, 200);
+    const newWidth = this.ratio * newHeight;
+    console.log([newWidth, newHeight])
+    return [newWidth, newHeight];
   }
 }
