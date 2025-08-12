@@ -1,63 +1,71 @@
-# OlympicGamesStarter
+# Olympic Games Statistics
 
 | Auteur | Version |   Commentaire    |
 |:------:|:-------:|:----------------:|
 | MERLY  |   1.0   | Première version |
 
-Ce projet permet de visualiser les statistiques des jeux olympiques depuis par pays
+## Présentation
+
+Ce projet permet de visualiser les statistiques des Jeux olympiques par pays à travers une interface utilisateur intuitive.
 
 ## Prérequis
 
-- Avoir installé node 22.18.0 et supérieur.
+- **Node.js** : Version 22.18.0 ou supérieure.
 
-Pour verifier votre version de node, entrez la commande suivante dans votre terminal :
+Pour vérifier la version de Node.js installée, exécutez la commande suivante dans votre terminal :
 
-```
+```bash
 node --version
 ```
 
 ## Installation
 
-Pour installer ce projet entrez la commande suivante dans votre terminal dans le dossier du projet :
+Pour installer les dépendances du projet, accédez au dossier du projet via votre terminal et exécutez :
 
-```
+```bash
 npm install
 ```
 
-## Execution
+## Exécution
 
-Pour executer ce projet entrez la commande suivante dans votre terminal dans le dossier du projet :
+Pour lancer le projet, accédez au dossier du projet via votre terminal et exécutez :
 
-```
+```bash
 npm start
 ```
 
 ## Documentation
 
-Ce projet utilise Angular 19, pour plus d'information sur Angular, rendez-vous sur [Angular.io](https://angular.io/).
+Ce projet est développé avec **Angular 19**. Pour plus d'informations, consultez la documentation officielle sur [Angular.io](https://angular.io/).
 
-Il utilise également [ngx-charts](https://swimlane.github.io/ngx-charts/) pour les graphiques.
+Les graphiques sont générés à l'aide de la bibliothèque [ngx-charts](https://swimlane.github.io/ngx-charts/).
 
-### Architecture
+### Architecture du projet
 
-Arborescence du projet :
-
-```
-core
-  components      # Les composants communs aux pages
-  services        # Contient les services
-  interceptors    # Les intercepteurs Http
-  models          # Les differents types/interfaces utilisé par le projet
-dashboard
-  components      # Les composants principaux appelé par les pages 
-pages             # Les pages du projet qui suit la strucutre des urls en concordance avec app.routes.ts
+L'arborescence du projet est organisée comme suit :
 
 ```
+src/
+├── core/
+│   ├── components/       # Composants réutilisables partagés entre les pages
+│   ├── services/         # Services pour la logique métier
+│   ├── interceptors/     # Intercepteurs HTTP pour la gestion des requêtes
+│   ├── models/           # Types et interfaces utilisés dans le projet
+├── dashboard/
+│   ├── components/       # Composants principaux utilisés par les pages
+├── pages/                # Pages du projet, alignées sur la structure des routes (voir app.routes.ts)
+└── variables.scss        # Variables SCSS pour la gestion des styles
+```
 
-### Spécificités
+### Spécificités techniques
 
-Le projet a été retravaillé de facon à fonctionner avec des composants standalone.
+- **Composants standalone** : Le projet utilise des composants autonomes pour une meilleure modularité.
+- **Injection de services** : Les services sont injectés via la fonction `inject` plutôt que par l'injection classique dans le constructeur.
+- **ESLint** : Activé pour garantir la qualité du code et le respect des bonnes pratiques.
+- **Styling** :
+  - Les styles sont basés sur une palette de couleurs définie dans les maquettes, centralisée dans `/src/variables.scss`.
+  - Utilisation de **CSS Flexbox** pour le positionnement des éléments.
 
-Les services sont injecté avec inject au lieu de l'injection par constructeur.
+## Design
 
-Eslint a été activé sur ce projet afin de garantir une certaine qualité du code et le respect des bonnes pratiques.
+Le design du projet repose sur une palette de couleurs cohérente, définie dans le fichier `/src/variables.scss`. L'utilisation de CSS Flexbox assure un placement précis et responsive des éléments à travers l'application.
