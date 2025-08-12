@@ -65,6 +65,7 @@ src/
 - **Styling** :
   - Les styles sont basés sur une palette de couleurs définie dans les maquettes, centralisée dans `/src/variables.scss`.
   - Utilisation de **CSS Flexbox** pour le positionnement des éléments.
+- **Tests unitaires** : Les tests unitaires ne sont pas implémentés dans ce projet.
 
 ## Design
 
