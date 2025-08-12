@@ -1,7 +1,8 @@
-@use '../../../../variables' as *;
+@use '../../../../variables' as ds;
+@use "sass:color";
 
 .loading-spinner {
-  background-color: white;
+  background-color: ds.$main-bg-color;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -14,8 +15,8 @@
 .spinner {
   width: 50px;
   height: 50px;
-  border: 5px solid darken(white, 10%);
-  border-top: 5px solid var(--main-bg-color);
+  border: 5px solid color.adjust($color: ds.$main-bg-color, $lightness: 10%);
+  border-top: 5px solid ds.$secondary-bg-color;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 1rem;
@@ -23,7 +24,7 @@
 
 .loading-text {
   margin: 0;
-  color: #333;
+  color: ds.$number-text-color;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -38,7 +39,7 @@
 }
 
 // Responsive design
-@media (max-width: $mobile-width) {
+@media (max-width: ds.$mobile-width) {
   .loading-spinner {
     padding: 1.5rem;
     min-width: 160px;

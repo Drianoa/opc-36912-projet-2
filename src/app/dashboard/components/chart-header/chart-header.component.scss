@@ -1,4 +1,4 @@
-@use '../../../../variables' as *;
+@use '../../../../variables' as ds;
 
 .header {
   &-content {
@@ -10,12 +10,12 @@
   }
 
   &-title {
-    color: white;
+    color: ds.$main-text-color;
     font-size: 1.5rem;
     margin: 0;
     text-align: center;
     padding: 0.5rem 1rem;
-    background-color: var(--main-bg-color);
+    background-color: ds.$secondary-bg-color;
     border-radius: 0.5rem;
     display: inline-block;
     align-self: center;
@@ -32,7 +32,7 @@
 
 
 // Responsive styles
-@media (max-width: $mobile-width) {
+@media (max-width: ds.$mobile-width) {
   .stats-container {
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,7 @@
+@use '../variables' as ds;
+
 .content {
-  background-color: #fff;
+  background-color: ds.$main-bg-color;
   // Pas de padding en bas de la page
   padding: 1rem;
   padding-bottom: 0;

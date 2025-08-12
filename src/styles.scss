@@ -1,12 +1,11 @@
-@use 'variables' as *;
+@use 'variables' as ds;
 
 :root {
-  --main-bg-color: #{$main-bg-color};
-  --main-text-color: #{$main-text-color};
-  --number-text-color: #{$number-text-color};
-  --mobile-width: #{$mobile-width};
-  font-family: #{$main-font-family};
-  font-size: #{$base-font-size};
+  //--main-bg-color: #{ds.$secondary-bg-color};
+  //--main-text-color: #{ds.$secondary-text-color};
+  //--number-text-color: #{ds.$number-text-color};
+  font-family: #{ds.$main-font-family};
+  font-size: #{ds.$base-font-size};
 }
 
 body {
