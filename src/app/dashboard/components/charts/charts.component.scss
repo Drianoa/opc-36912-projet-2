@@ -6,6 +6,14 @@
     border-top-color: ds.$secondary-bg-color;
   }
 
+  .tooltip-caret.position-right {
+    border-right-color: ds.$secondary-bg-color;
+  }
+
+  .tooltip-caret.position-left {
+    border-left-color: ds.$secondary-bg-color;
+  }
+
   background-color: ds.$secondary-bg-color;
 }
 
